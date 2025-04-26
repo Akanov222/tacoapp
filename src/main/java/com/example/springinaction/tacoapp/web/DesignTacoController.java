@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,24 +37,9 @@ public class DesignTacoController {
 
         Ingredient.Type[] types = Ingredient.Type.values();
         for (Ingredient.Type type : types) {
-            model.addAllAttributes(type.toString().toLowerCase(),
+            model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
-    }
-
-    @ModelAttribute(name = "tacoOrder")
-    public TacoOrder order() {
-        return new TacoOrder();
-    }
-
-    @ModelAttribute(name = "tacoOrder")
-    public Taco taco() {
-        return new Taco();
-    }
-
-    @GetMapping
-    public String showDesignForm() {
-        return "design";
     }
 
     private static Iterable<Ingredient> filterByType(
@@ -64,5 +49,28 @@ public class DesignTacoController {
                 .stream()
                 .filter(x -> x.getType().equals(type))
                 .collect(Collectors.toList());
+    }
+
+    @ModelAttribute(name = "tacoOrder")
+    public TacoOrder order() {
+        return new TacoOrder();
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
+    @GetMapping
+    public String showDesignForm() {
+        return "design";
+    }
+
+    @PostMapping
+    public String processTaco(Taco taco,
+                              @ModelAttribute TacoOrder tacoOrder) {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco:{}", taco);
+        return "redirect:/orders/current";
     }
 }

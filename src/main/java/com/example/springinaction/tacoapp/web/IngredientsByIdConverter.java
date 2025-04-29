@@ -24,6 +24,8 @@ public class IngredientsByIdConverter implements Converter<String, Ingredient> {
         ingredientMap.put("TMTO",
                 new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES));
         ingredientMap.put("CHED",
+                new Ingredient("LTTC", "Lettuce", Ingredient.Type.VEGGIES));
+        ingredientMap.put("CHED",
                 new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE));
         ingredientMap.put("JACK",
                 new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE));

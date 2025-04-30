@@ -1,12 +1,19 @@
 package com.example.springinaction.tacoapp;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
-
+import jakarta.persistence.*;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@Entity
+@Table(name = "taco_orders")
 public class TacoOrder {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
@@ -26,6 +33,7 @@ public class TacoOrder {
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
 
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
@@ -104,5 +112,33 @@ public class TacoOrder {
 
     public void setTacos(List<Taco> tacos) {
         this.tacos = tacos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TacoOrder tacoOrder = (TacoOrder) o;
+        return Objects.equals(id, tacoOrder.id) && Objects.equals(deliveryName, tacoOrder.deliveryName) && Objects.equals(deliveryStreet, tacoOrder.deliveryStreet) && Objects.equals(deliveryCity, tacoOrder.deliveryCity) && Objects.equals(deliveryState, tacoOrder.deliveryState) && Objects.equals(deliveryZip, tacoOrder.deliveryZip) && Objects.equals(ccNumber, tacoOrder.ccNumber) && Objects.equals(ccExpiration, tacoOrder.ccExpiration) && Objects.equals(ccCVV, tacoOrder.ccCVV) && Objects.equals(tacos, tacoOrder.tacos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, deliveryName, deliveryStreet, deliveryCity, deliveryState, deliveryZip, ccNumber, ccExpiration, ccCVV, tacos);
+    }
+
+    @Override
+    public String toString() {
+        return "TacoOrder{" +
+                "id=" + id +
+                ", deliveryName='" + deliveryName + '\'' +
+                ", deliveryStreet='" + deliveryStreet + '\'' +
+                ", deliveryCity='" + deliveryCity + '\'' +
+                ", deliveryState='" + deliveryState + '\'' +
+                ", deliveryZip='" + deliveryZip + '\'' +
+                ", ccNumber='" + ccNumber + '\'' +
+                ", ccExpiration='" + ccExpiration + '\'' +
+                ", ccCVV='" + ccCVV + '\'' +
+                ", tacos=" + tacos +
+                '}';
     }
 }

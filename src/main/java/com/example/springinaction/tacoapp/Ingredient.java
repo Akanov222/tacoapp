@@ -1,15 +1,25 @@
 package com.example.springinaction.tacoapp;
 
-import lombok.Data;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
-//@Data
+@Entity
+@Table(name = "ingredients")
 public class Ingredient {
 
-    private final String id;
-    private final String name;
-    private final Type type;
+    @Id
+    private String id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Type type;
+
+    public Ingredient() {
+    }
 
     public Ingredient(String id, String name, Type type) {
         this.id = id;

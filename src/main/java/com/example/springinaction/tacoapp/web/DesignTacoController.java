@@ -2,14 +2,12 @@ package com.example.springinaction.tacoapp.web;
 
 import com.example.springinaction.tacoapp.Ingredient;
 import com.example.springinaction.tacoapp.TacoOrder;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,10 +17,11 @@ import com.example.springinaction.tacoapp.Taco;
 
 import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/design")
 public class DesignTacoController {
+
+    private static final Logger log = LoggerFactory.getLogger(DesignTacoController.class);
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
@@ -74,6 +73,7 @@ public class DesignTacoController {
     public String processTaco(@Valid Taco taco, Errors errors,
                               @ModelAttribute TacoOrder tacoOrder) {
         if (errors.hasErrors()) {
+            log.error("Taco validation errors: {}", errors.getAllErrors());
             return "design";
         }
         tacoOrder.addTaco(taco);

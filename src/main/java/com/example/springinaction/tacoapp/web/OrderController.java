@@ -1,8 +1,8 @@
 package com.example.springinaction.tacoapp.web;
 
-import com.example.springinaction.tacoapp.Taco;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.springinaction.tacoapp.TacoOrder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +10,12 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     @GetMapping("/current")
     public String orderForm() {
@@ -25,6 +26,7 @@ public class OrderController {
     public String processOrder(@Valid TacoOrder tacoOrder, Errors errors,
                                SessionStatus sessionStatus) {
         if (errors.hasErrors()) {
+            log.error("Taco order errors: {}", errors.getAllErrors());
             return "orderForm";
         }
         log.info("Order submitted:{}", tacoOrder);

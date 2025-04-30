@@ -23,7 +23,7 @@ public class IngredientsByIdConverter implements Converter<String, Ingredient> {
                 new Ingredient("CARN", "Carnitas", Ingredient.Type.PROTEIN));
         ingredientMap.put("TMTO",
                 new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES));
-        ingredientMap.put("CHED",
+        ingredientMap.put("LTTC",
                 new Ingredient("LTTC", "Lettuce", Ingredient.Type.VEGGIES));
         ingredientMap.put("CHED",
                 new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE));

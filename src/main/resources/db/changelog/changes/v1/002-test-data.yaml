@@ -1,0 +1,134 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: your_name
+      changes:
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "FLTO"
+              - column:
+                  name: name
+                  value: "Flour Tortilla"
+              - column:
+                  name: type
+                  value: "WRAP"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "COTO"
+              - column:
+                  name: name
+                  value: "Corn Tortilla"
+              - column:
+                  name: type
+                  value: "WRAP"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "GRBF"
+              - column:
+                  name: name
+                  value: "Ground Beef"
+              - column:
+                  name: type
+                  value: "PROTEIN"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "CARN"
+              - column:
+                  name: name
+                  value: "Carnitas"
+              - column:
+                  name: type
+                  value: "PROTEIN"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "TMTO"
+              - column:
+                  name: name
+                  value: "Diced Tomatoes"
+              - column:
+                  name: type
+                  value: "VEGGIES"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "LTTC"
+              - column:
+                  name: name
+                  value: "Lettuce"
+              - column:
+                  name: type
+                  value: "VEGGIES"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "CHED"
+              - column:
+                  name: name
+                  value: "Cheddar"
+              - column:
+                  name: type
+                  value: "CHEESE"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "JACK"
+              - column:
+                  name: name
+                  value: "Monterrey Jack"
+              - column:
+                  name: type
+                  value: "CHEESE"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "SLSA"
+              - column:
+                  name: name
+                  value: "Salsa"
+              - column:
+                  name: type
+                  value: "SAUCE"
+
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: "SLSR"
+              - column:
+                  name: name
+                  value: "Sour Cream"
+              - column:
+                  name: type
+                  value: "SAUCE"

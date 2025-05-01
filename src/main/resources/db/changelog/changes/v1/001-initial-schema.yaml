@@ -1,0 +1,133 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(4)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: tacos
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: taco_orders
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: delivery_name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_street
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_city
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_state
+                  type: VARCHAR(2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_zip
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_number
+                  type: VARCHAR(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_expiration
+                  type: VARCHAR(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_cvv
+                  type: VARCHAR(3)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: taco_ingredients
+            columns:
+              - column:
+                  name: taco_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_taco_ingredients_taco
+                    references: tacos(id)
+              - column:
+                  name: ingredient_id
+                  type: VARCHAR(4)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_taco_ingredients_ingredient
+                    references: ingredients(id)
+            constraints:
+              primaryKey:
+                columnNames: taco_id, ingredient_id
+
+        - createTable:
+            tableName: order_tacos
+            columns:
+              - column:
+                  name: order_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_tacos_order
+                    references: taco_orders(id)
+              - column:
+                  name: taco_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_tacos_taco
+                    references: tacos(id)
+            constraints:
+              primaryKey:
+                columnNames: order_id, taco_id

@@ -1,3 +1,38 @@
 services:
-  web:
-    image: mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+  tacoapp:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://sqlserver:1433;databaseName=tacodb;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=YourStrong@Passw0rd
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  sqlserver:
+#    image: mcr.microsoft.com/mssql/server:2022-windowsservercore-ltsc2019  # Актуальный Windows-образ
+#    platform: windows
+    image: mcr.microsoft.com/mssql/server:2019-latest  # Linux-образ
+    platform: linux/amd64  # Явно указываем платформу
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Express
+    volumes:
+#      - sqlserver_data:C:\ProgramData\docker\volumes\sqlserver_data
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+#      test: ["CMD", "sqlcmd", "-U", "sa", "-P", "YourStrong@Passw0rd", "-Q", "SELECT 1"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -U sa -P YourStrong@Passw0rd -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  sqlserver_data:
+
+

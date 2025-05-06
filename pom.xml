@@ -81,29 +81,30 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId></plugin>
-<!--			<plugin>-->
-<!--				<groupId>com.spotify</groupId>-->
-<!--				<artifactId>dockerfile-maven-plugin</artifactId>-->
-<!--				<version>1.4.13</version>-->
-<!--				<configuration>-->
-<!--					&lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-<!--					<repository>${docker.image.prefix}/${project.artifactId}</repository>-->
-<!--					<buildArgs>-->
-<!--						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
-<!--					</buildArgs>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.liquibase</groupId>-->
-<!--				<artifactId>liquibase-maven-plugin</artifactId>-->
-<!--				<version>4.29.2</version>-->
-<!--			<dependency>-->
-<!--				<groupId>com.microsoft.sqlserver</groupId>-->
-<!--				<artifactId>mssql-jdbc</artifactId>-->
-<!--				&lt;!&ndash;<version>12.6.1.jre11</version>&ndash;&gt;-->
-<!--				<version>11.2.0.jre17</version>-->
-<!--			</dependency>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.13</version>
+				<configuration>
+					<!--suppress UnresolvedMavenProperty -->
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.29.2</version>
+<!--				<dependencies>-->
+<!--					<dependency>-->
+<!--						<groupId>com.microsoft.sqlserver</groupId>-->
+<!--						<artifactId>mssql-jdbc</artifactId>-->
+<!--						<version>11.2.0.jre17</version>-->
+<!--					</dependency>-->
+<!--				</dependencies>-->
+			</plugin>
 		</plugins>
 	</build>
 </project>
